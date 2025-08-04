@@ -1,0 +1,215 @@
+/* 全域基本設定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Zen Kurenaido', sans-serif;
+  background: url('../image/mainpage2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ✅ 圓圈外層半透明框，往下移避免被箭頭遮住 */
+.circle-wrapper {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 40px 20px;
+  margin: 100px auto 60px;
+  max-width: 1300px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+/* 圓圈區域容器 */
+.circle-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 個別圓圈項目 */
+.circle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  transition: transform 0.3s ease;
+}
+
+.circle-link {
+  display: flex; /* ✅ 新增 */
+  justify-content: center; /* ✅ 水平置中 */
+  align-items: center;     /* ✅ 垂直置中 */
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.circle-link:hover,
+.circle-link:focus {
+  transform: scale(1.1);
+}
+
+/* ✅ 圓圈內圖片設定：完整呈現圖片不裁切 */
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 圓下方標題 */
+.circle-item p {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Zen Kurenaido', serif; /* ✅ 修改字型 */
+}
+
+/* 響應式：手機 */
+@media (max-width: 480px) {
+  .circle-grid {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .circle-item {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .circle-link {
+    width: 120px;
+    height: 120px;
+  }
+
+  .circle-item p {
+    font-size: 1rem;
+  }
+
+  body {
+    background: url('../image/mainpage2mobile.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .circle-wrapper {
+    padding: 20px 10px;
+    margin: 80px 10px 40px;
+  }
+}
+
+/* ✅ 跳動箭頭動畫（改為固定在最上方） */
+.scroll-up {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  animation: bounce 1.5s infinite;
+  font-family: 'Lexend', sans-serif;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* 首頁返回 icon */
+.home-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.home-logo img {
+  width: 160px;
+  transition: transform 0.3s ease;
+}
+
+.home-logo img:hover {
+  transform: scale(1.1);
+}
+
+/* 漢堡選單 */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+  color: #000;
+  display: block;
+}
+
+/* 導覽選單樣式 */
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  width: 200px;
+  height: 100%;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 60px 20px;
+}
+
+.nav-menu ul li {
+  margin: 20px 0;
+}
+
+.nav-menu ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.nav-menu.show {
+  transform: translateX(0);
+}
+
+/* 子選單 */
+.has-submenu .submenu {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding-left: 15px;
+  list-style: none;
+  margin-top: 0;
+}
+
+.has-submenu.active .submenu {
+  max-height: 500px;
+  margin-top: 10px;
+}
+
+.has-submenu > a::after {
+  content: ' ▼';
+  font-size: 0.8em;
+  margin-left: 5px;
+}
